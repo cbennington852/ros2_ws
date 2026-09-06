@@ -15,5 +15,5 @@ Module contents
 
 .. automodule:: srv_services
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

@@ -15,7 +15,14 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class check_movement(Node):
+    """
+    Checks to see if the robot is moving. 
+    """
     def __init__(self):
+        """
+        Initializes the node, declares parameters, sets up the robot client,
+               and configures the publisher and polling timer.
+        """
         super().__init__('move_pub')
 
         self.declare_parameters(
@@ -30,6 +37,13 @@ class check_movement(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
+        """Periodically reads the robot's status and publishes the message.
+        Triggered by the main timer loop. Fetches data via the robot driver interface,
+        wraps it in a IsMoving message, and broadcasts it.
+
+        Returns:
+            response (IsMoving): msg.moving bool to tell you if robot is moving. 
+        """  
         msg = IsMoving()                                          
         msg.moving = bool(self.bot.is_moving())                             
         self.publisher_.publish(msg)

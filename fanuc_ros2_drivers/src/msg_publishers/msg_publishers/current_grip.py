@@ -15,7 +15,14 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class check_grip(Node):
+    """
+    Tells you what the current status of the gripper hand is.
+    """
     def __init__(self):
+        """
+        Initializes the node, declares parameters, sets up the robot client,
+               and configures the pose publisher and polling timer.
+        """
         super().__init__('grip_pub')
 
         self.declare_parameters(
@@ -30,6 +37,13 @@ class check_grip(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
+        """Periodically reads the robot's status and publishes the message.
+        Triggered by the main timer loop. Fetches data via the robot driver interface,
+        wraps it in a CurGripper message, and broadcasts it.
+
+        Returns:
+            response (CurGripper): msg.open tells you if the gripper is open.
+        """
         msg = CurGripper()                               
         msg.open = bool(self.bot.schunk_gripper_status())                      
         self.publisher_.publish(msg)

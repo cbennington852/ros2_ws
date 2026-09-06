@@ -15,7 +15,14 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class check_prox(Node):
+    """
+    Tells you the values of the conveyors proximity sensors.
+    """
     def __init__(self):
+        """
+        Initializes the node, declares parameters, sets up the robot client,
+               and configures the publisher and polling timer.
+        """
         super().__init__('prox_pub')
 
         self.declare_parameters(
@@ -30,6 +37,13 @@ class check_prox(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
+        """Periodically reads the robot's status and publishes the message.
+        Triggered by the main timer loop. Fetches data via the robot driver interface,
+        wraps it in a ProxReadings message, and broadcasts it.  
+
+        Returns:
+            response (ProxReadings): msg.left is the left sensor. msg.right is the right sensor. Both are bools.
+        """  
         msg = ProxReadings()                                          
         msg.left = bool(self.bot.conveyor_proximity_sensor("left")) 
         msg.right = bool(self.bot.conveyor_proximity_sensor("right"))        

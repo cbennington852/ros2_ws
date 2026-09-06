@@ -16,6 +16,8 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class joint_pose_server(Node):
+    """Sets the joints
+    """
     def __init__(self):
         super().__init__('joint_pose_server')
 
@@ -34,7 +36,33 @@ class joint_pose_server(Node):
                                         cancel_callback = self.cancel_callback)
 
     def goal_callback(self, goal_request):
-        """ Accepts or Rejects client request to begin Action """
+        """Tells the robot to move to a certain joint position. 
+        
+        Each joint must be joint < 179.9 and joint > -179.9
+
+        Args:
+            - goal_request (JointPose.Goal): Takes in joint1-6 parameters. Each are floats.
+
+        Example:
+            .. code-block:: python
+
+                print("Running Joint test")
+                self.joints_ac.wait_for_server()
+                joint_goal = JointPose.Goal()
+                # Add all joints
+                joint_goal.joint1 = 90.0
+                joint_goal.joint2 = 18.0
+                joint_goal.joint3 = -41.0
+                joint_goal.joint4 = -2.0
+                joint_goal.joint5 = -48.0
+                joint_goal.joint6 = -148.0
+                future = self.joints_ac.send_goal_async(joint_goal, feedback_callback=self.feedback_callback)
+                future.add_done_callback(self.goal_response_callback)
+
+
+        Returns:
+            response (GoalResponse): Either GoalResponse.REJECT or GoalResponse.ACCEPT
+        """ 
         self.goal = goal_request 
         # FIX!! This is ugly.. Put into a list.any()? Switch is also faster
         # Check that it recieved a valid goal

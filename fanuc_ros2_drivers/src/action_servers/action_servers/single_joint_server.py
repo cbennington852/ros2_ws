@@ -34,7 +34,28 @@ class sjoint_pose_server(Node):
                                         cancel_callback = self.cancel_callback)
 
     def goal_callback(self, goal_request):
-        """ Accepts or Rejects client request to begin Action """
+        """Tells the robot to move a single joint.
+        
+        Args:
+            - goal_request (SJointPose.Goal): msg.joint, corrisponding to a joint, and msg.angle, corrisponding to an angle.
+
+        
+        Example:
+            .. code-block:: python
+
+                 # Single Joints
+                print("Running single joint test")
+                self.sin_joint_ac.wait_for_server()
+                sjoint_goal = SJointPose.Goal()
+                sjoint_goal.joint = 1
+                sjoint_goal.angle = 45.0
+                future = self.sin_joint_ac.send_goal_async(sjoint_goal, feedback_callback=self.feedback_callback)
+                future.add_done_callback(self.goal_response_callback)
+        
+        
+        Returns:
+            response (GoalResponse): Either GoalResponse.REJECT or GoalResponse.ACCEPT
+        """ 
         self.goal = goal_request 
         
         # Check that it recieved a valid goal

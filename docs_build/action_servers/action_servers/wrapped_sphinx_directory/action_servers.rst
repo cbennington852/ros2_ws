@@ -19,5 +19,5 @@ Module contents
 
 .. automodule:: action_servers
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

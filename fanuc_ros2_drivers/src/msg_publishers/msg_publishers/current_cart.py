@@ -15,7 +15,15 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class current_cartesian(Node):
+    """
+    A ROS 2 node that reads and publishes the robot's current Cartesian pose.
+    """
+
     def __init__(self):
+        """
+        Initializes the node, declares parameters, sets up the robot client,
+               and configures the pose publisher and polling timer.
+        """
         super().__init__('cur_cart')
 
         self.declare_parameters(
@@ -30,6 +38,13 @@ class current_cartesian(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
+        """Periodically reads the robot's status and publishes the message.
+        Triggered by the main timer loop. Fetches data via the robot driver interface,
+        wraps it in a CurCartesian message, and broadcasts it.
+
+        Returns:
+            response (CurCartesian): msg.pose tells you the current robot cartesion coords. Returns in the format -> [X, Y, Z, W, P, R]
+        """
         msg = CurCartesian()                                          
         msg.pose = self.bot.read_current_cartesian_pose()                                  
         self.publisher_.publish(msg)

@@ -16,6 +16,8 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class onrobot_gripper_server(Node):
+    """Sets gripper angle.
+    """
     def __init__(self):
         super().__init__('onrobot_gripper_server')
 
@@ -34,7 +36,14 @@ class onrobot_gripper_server(Node):
                                         cancel_callback = self.cancel_callback)
 
     def goal_callback(self, goal_request):
-        """ Accepts or Rejects client request to begin Action """
+        """Tells the robot to move to a gripper configuration.
+        
+        Args:
+            - goal_request (OnRobotGripper.Goal): Takes in a msg.width and a msg.force params. Force should be less than 120 and greater than 0. Width should be less than 160 and greater than 0.
+
+        Returns:
+            response (GoalResponse): Either GoalResponse.REJECT or GoalResponse.ACCEPT
+        """ 
         self.goal = goal_request 
         
         # Check that it recieved a valid goal

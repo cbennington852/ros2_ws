@@ -35,7 +35,30 @@ class schunk_gripper_server(Node):
                                         cancel_callback = self.cancel_callback)
 
     def goal_callback(self, goal_request):
-        """ Accepts or Rejects client request to begin Action """
+        """Tells the robot to move to a gripper configuration.
+        
+        Args:
+            - goal_request (SchunkGripper.Goal): Takes in a msg.command. Either "open" or "close".
+
+        
+        Example:
+            .. code-block:: python
+
+                print("Running Schunk Test")
+                print("Test 1")
+                self.schunk_ac.wait_for_server()
+                schunk_goal = SchunkGripper.Goal()
+                schunk_goal.command = 'open'
+                self.schunk_ac.send_goal(schunk_goal)
+                sleep(5)
+                print("Test 2")
+                schunk_goal = SchunkGripper.Goal()
+                schunk_goal.command = 'close'
+                self.schunk_ac.send_goal(schunk_goal)
+        
+        Returns:
+            response (GoalResponse): Either GoalResponse.REJECT or GoalResponse.ACCEPT
+        """ 
         self.goal = goal_request 
         
         # Check that it recieved a valid goal

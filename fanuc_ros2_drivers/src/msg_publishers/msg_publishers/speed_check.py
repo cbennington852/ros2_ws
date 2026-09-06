@@ -15,7 +15,14 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class check_speed(Node):
+    """
+    Returns current set speed of robot speed in mm/s. Access via msg.speed. Publisher returns an int.
+    """
     def __init__(self):
+        """
+        Initializes the node, declares parameters, sets up the robot client,
+               and configures the publisher and polling timer.
+        """
         super().__init__('speed_pub')
 
         self.declare_parameters(
@@ -30,6 +37,13 @@ class check_speed(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
+        """Reads the speed of the robot arm.Periodically reads the robot's status and publishes the message.
+        Triggered by the main timer loop. Fetches data via the robot driver interface,
+        wraps it in a CurSpeed message, and broadcasts it. 
+
+        Returns:
+            response (CurSpeed): msg.speed contains the speed of the robot in mm/s.
+        """  
         msg = CurSpeed()                                          
         msg.speed = self.bot.get_speed()                                    
         self.publisher_.publish(msg)

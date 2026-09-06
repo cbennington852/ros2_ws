@@ -16,6 +16,9 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class cart_pose_server(Node):
+    """
+    Node to give the robot a caresian pose to move to. 
+    """
     def __init__(self):
         super().__init__('cart_pose_server')
 
@@ -33,8 +36,34 @@ class cart_pose_server(Node):
                                         goal_callback = self.goal_callback,
                                         cancel_callback = self.cancel_callback)
 
-    def goal_callback(self, goal_request):
-        """ Accepts or Rejects client request to begin Action """
+    def goal_callback(self, goal_request):     
+        """Tells the robot to move to a certain cartesian position. 
+        
+        w, r, and p must be greater than 179.9 or less than -179.9
+
+        Args:
+            - goal_request (CartPose.Goal): Takes in x,y,z,w,p,r parameters. Each are floats.
+
+        Example:
+            .. code-block:: python
+
+                self.cart_ac.wait_for_server() # Wait till its ready
+                cart_goal = CartPose.Goal() # Make goal
+                # Add all coordinates 
+                cart_goal.x = 110.77
+                cart_goal.y = 672.0
+                cart_goal.z = -102.75
+                cart_goal.w = 170.0
+                cart_goal.p = 0.0
+                cart_goal.r = 30.0
+                future = self.cart_ac.send_goal_async(cart_goal, feedback_callback=self.feedback_callback)
+                future.add_done_callback(self.goal_response_callback)
+                sleep(5) 
+
+        Returns:
+            response (GoalResponse): Either GoalResponse.REJECT or GoalResponse.ACCEPT
+        """ 
+
         self.goal = goal_request 
         
         # Check that it recieved a valid goal
@@ -74,6 +103,9 @@ class cart_pose_server(Node):
             return CancelResponse.ACCEPT
 
     def execute_callback(self, goal_handle):
+        """
+        Executes the specified callback.
+        """
         try:
             # Create base for feedback
             feedback_msg = CartPose.Feedback()

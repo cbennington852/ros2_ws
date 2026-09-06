@@ -16,6 +16,7 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class convey_server(Node):
+    """A node to control the conveyor belt."""
     def __init__(self):
         super().__init__('convey_server')
 
@@ -34,7 +35,30 @@ class convey_server(Node):
                                         cancel_callback = self.cancel_callback)
 
     def goal_callback(self, goal_request):
-        """ Accepts or Rejects client request to begin Action """
+        """Changes the conveyorbelt. Takes in a goal_request.
+
+        Args:
+            - goal_request (Conveyor.Goal): Takes in a goal.command.
+                command = "forward" 
+                command = "reverse"
+                command = "stop" 
+
+        Example:
+            .. code-block:: python
+
+                print("Running Convey Tests")
+                print("Test 1")
+                self.convey_ac.wait_for_server()
+                convey_goal = Conveyor.Goal()
+                convey_goal.command = 'forward'
+                self.convey_ac.send_goal(convey_goal)
+
+        Returns:
+            GoalResponse: GoalResponse.ACCEPT or GoalResponse.REJECT
+        """  
+        
+        
+        # """ Accepts or Rejects client request to begin Action """
         self.goal = goal_request 
         
         # Check that it recieved a valid goal
@@ -58,6 +82,7 @@ class convey_server(Node):
             return CancelResponse.ACCEPT
 
     async def execute_callback(self, goal_handle):
+        """Executes the callback."""
         # WIP: Add Try/Except to catch possible error
         self.bot.conveyor(self.goal.command)
 

@@ -418,3 +418,5 @@ class robot:
         # If not closed, its open
         return not r1
 
+        return not True # is open
+

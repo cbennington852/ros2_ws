@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -5,16 +7,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>action_servers.convey_server module &mdash; action_servers 0.1.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
-  
-        <script src="_static/jquery.js?v=8dae8fb0"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=a58bc63e"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,9 +34,6 @@
           <a href="index.html" class="icon icon-home">
             action_servers
           </a>
-              <div class="version">
-                0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -96,8 +94,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="action-servers-convey-server-module">
-<h1>action_servers.convey_server module<a class="headerlink" href="#action-servers-convey-server-module" title="Link to this heading"></a></h1>
+  <section id="module-action_servers.convey_server">
+<span id="action-servers-convey-server-module"></span><h1>action_servers.convey_server module<a class="headerlink" href="#module-action_servers.convey_server" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="action_servers.convey_server.convey_server">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">action_servers.convey_server.</span></span><span class="sig-name descname"><span class="pre">convey_server</span></span><a class="headerlink" href="#action_servers.convey_server.convey_server" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></p>
+<p>A node to control the conveyor belt.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_servers.convey_server.convey_server.cancel_callback">
+<span class="sig-name descname"><span class="pre">cancel_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_handle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.convey_server.convey_server.cancel_callback" title="Link to this definition"></a></dt>
+<dd><p>Accept or reject a client request to cancel an action.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_servers.convey_server.convey_server.destroy">
+<span class="sig-name descname"><span class="pre">destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.convey_server.convey_server.destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_servers.convey_server.convey_server.execute_callback">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">execute_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_handle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.convey_server.convey_server.execute_callback" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_servers.convey_server.convey_server.goal_callback">
+<span class="sig-name descname"><span class="pre">goal_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.convey_server.convey_server.goal_callback" title="Link to this definition"></a></dt>
+<dd><p>Changes the conveyorbelt. Takes in a goal_request.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>goal_request (_type_): Takes in a goal.command.</dt><dd><p>command = “forward” 
+command = “reverse”
+command = “stop”</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>GoalResponse: GoalResponse.ACCEPT or GoalResponse.REJECT</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="action_servers.convey_server.main">
+<span class="sig-prename descclassname"><span class="pre">action_servers.convey_server.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.convey_server.main" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
 
 

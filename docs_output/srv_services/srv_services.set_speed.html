@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -5,16 +7,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>srv_services.set_speed module &mdash; srv_services 0.1.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
-  
-        <script src="_static/jquery.js?v=8dae8fb0"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=a58bc63e"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,9 +34,6 @@
           <a href="index.html" class="icon icon-home">
             srv_services
           </a>
-              <div class="version">
-                0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -93,8 +91,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="srv-services-set-speed-module">
-<h1>srv_services.set_speed module<a class="headerlink" href="#srv-services-set-speed-module" title="Link to this heading"></a></h1>
+  <section id="module-srv_services.set_speed">
+<span id="srv-services-set-speed-module"></span><h1>srv_services.set_speed module<a class="headerlink" href="#module-srv_services.set_speed" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="srv_services.set_speed.main">
+<span class="sig-prename descclassname"><span class="pre">srv_services.set_speed.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#srv_services.set_speed.main" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="srv_services.set_speed.set_speed">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">srv_services.set_speed.</span></span><span class="sig-name descname"><span class="pre">set_speed</span></span><a class="headerlink" href="#srv_services.set_speed.set_speed" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></p>
+<p>Sets the speed of the robot.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="srv_services.set_speed.set_speed.service_callback">
+<span class="sig-name descname"><span class="pre">service_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#srv_services.set_speed.set_speed.service_callback" title="Link to this definition"></a></dt>
+<dd><p>Changes the speed of the robot arm.</p>
+<dl>
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>request (SetSpeed.Request): Takes in a speed parameter, this speed needs to be between 0 - 300 inclusive.</p></li>
+<li><p>response (Any): The success parameter is set to True or False.</p></li>
+</ul>
+</dd>
+<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Speed</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Speed test"</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">SetSpeed</span><span class="o">.</span><span class="n">Request</span><span class="p">()</span>
+<span class="n">request</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">250</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_sc</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="n">timeout_sec</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="k">pass</span> <span class="c1"># Wait for service to be ready</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Service ready, sending request"</span><span class="p">)</span>
+<span class="n">future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_sc</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">future</span><span class="o">.</span><span class="n">done</span><span class="p">():</span>
+    <span class="k">pass</span> <span class="c1"># Wait to be done</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Speed result:"</span><span class="p">,</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>Returns:</dt><dd><p>response (Any): The success parameter is set to True or False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 

@@ -19,5 +19,5 @@ Module contents
 
 .. automodule:: msg_publishers
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

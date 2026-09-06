@@ -15,7 +15,19 @@ sys.path.append('./pycomm3/pycomm3')
 
 
 class current_joint(Node):
+    """
+    A ros2 Publisher Node which polls the current joint status. Runs every half a second.
+    Returns list of angles at each joint. 
+    Access Via msg.joint.
+    For example, the angle of joint 1 can be seen by accessing index 0. 
+    [0] -> joint 1
+
+    """
     def __init__(self):
+        """
+        Initializes the node, declares parameters, sets up the robot client,
+               and configures the publisher and polling timer.
+        """
         super().__init__('curr_joint')
 
         self.declare_parameters(
@@ -30,6 +42,15 @@ class current_joint(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
+        """Periodically reads the robot's status and publishes the message.
+        Triggered by the main timer loop. Fetches data via the robot driver interface,
+        wraps it in a CurJoints message, and broadcasts it.
+
+        Returns:
+            response (CurJoints): msg.joint is a list of angles at each joint. 
+                For example, the angle of joint 1 can be seen by accessing index 0. 
+                [0] -> joint 1
+        """ 
         msg = CurJoints()                                  
         msg.joints = self.bot.read_current_joint_position()
         self.publisher_.publish(msg)
