@@ -1,0 +1,230 @@
+<p><a name="readme-top"></a>
+<!-- PROJECT SHIELDS -->
+<a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3" /></a></p>
+
+<p><!-- PROJECT LOGO -->
+<!--
+<br /></p>
+
+<div align="center">
+  <a href="https://github.com/UniversityOfIdahoCDACS/FANUC-ROS2_Drivers">
+    <img src="images/logo.png" alt="Logo TBD" width="80" height="80">
+  </a>
+-->
+<h3 align="center">FANUC ROS2 Drivers</h3>
+
+  <p align="center">
+    Release 0.1.1
+    <br />
+    <!--
+    <a href="https://github.com/UniversityOfIdahoCDACS/FANUC-ROS2_Drivers"><strong>Explore the docs »</strong></a>
+-->
+    <br />
+    <br />
+  </p>
+</div>
+
+<p><!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details></p>
+
+<p><!-- ABOUT THE PROJECT --></p>
+
+<h2>About The Project</h2>
+
+<p><!-- ADD SCREENSHOT HERE -->
+ROS2 Solution for FANUC robots</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<h3>Built With</h3>
+
+<ul>
+<li><a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="Python" /></a></li>
+</ul>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<p><!-- GETTING STARTED --></p>
+
+<h2>Getting Started</h2>
+
+<h3>Prerequisites</h3>
+
+<ul>
+<li>ROS2 Jazzy (or Humble)</li>
+<li>Python 3 and pip</li>
+<li><p>catkin_pkg (required for ROS2 build system)</p>
+
+<div class="codehilite">
+<pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-catkin-pkg<span class="w"> </span>python3-rosdep
+</code></pre>
+</div></li>
+<li><p>Put Fanuc TP programs on controller</p>
+
+<ul>
+<li>'ros2<em>eip</em>back.tp' needs to be running in the background</li>
+<li>'ros2<em>eip</em>mainv2.tp' runs in the foreground when you want to use ROS</li>
+</ul></li>
+</ul>
+
+<h3>Installation (Linux)</h3>
+
+<h4>Create a ROS2 Workspace</h4>
+
+<ol>
+<li>Source ROS2 Environment (use jazzy or humble depending on your installation)
+<div class="codehilite">
+<pre><span></span><code><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+</code></pre>
+</div></li>
+</ol>
+
+<p>Optionally, you can also run the following command to add it to your .bashrc file:
+   <div class="codehilite">
+   <pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"source /opt/ros/jazzy/setup.bash"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+   </code></pre>
+   </div></p>
+
+<ol start="2">
+<li><p>Create a new directory</p>
+
+<div class="codehilite">
+<pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws/
+</code></pre>
+</div></li>
+<li><p>Clone repo</p>
+
+<div class="codehilite">
+<pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/UofI-CDACS/fanuc_ros2_drivers/<span class="w"> </span>--branch<span class="w"> </span>v1.1
+</code></pre>
+</div></li>
+<li><p>Initialize rosdep (first time only)</p>
+
+<div class="codehilite">
+<pre><span></span><code>sudo<span class="w"> </span>rosdep<span class="w"> </span>init
+rosdep<span class="w"> </span>update
+</code></pre>
+</div></li>
+<li><p>Resolve Dependencies (use jazzy or humble to match your ROS2 version)</p>
+
+<div class="codehilite">
+<pre><span></span><code>rosdep<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>--from-path<span class="w"> </span>src<span class="w"> </span>--rosdistro<span class="w"> </span>jazzy<span class="w"> </span>-y
+</code></pre>
+</div>
+
+<p>Note: pycomm3 may need to be installed separately (handle this yourself via some sort of venv management):</p>
+
+<div class="codehilite">
+<pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>pycomm3
+</code></pre>
+</div></li>
+<li><p>Build the workspace with colcon</p>
+
+<div class="codehilite">
+<pre><span></span><code>colcon<span class="w"> </span>build
+</code></pre>
+</div>
+
+<p><em>Full guide here: <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">ROS2 Humble Documentation</a></em></p>
+
+<p>Installation Complete</p></li>
+</ol>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<p><!-- USAGE EXAMPLES --></p>
+
+<h2>Usage</h2>
+
+<h2>Running Nodes (Server)</h2>
+
+<ol>
+<li>Open new terminal and go to workspace</li>
+<li><p>Source overlay (after building workspace):</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="nb">source</span><span class="w"> </span>install/setup.sh
+</code></pre>
+</div></li>
+<li><p>Run launch
+ <div class="codehilite">
+ <pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>launch/start.launch.py<span class="w"> </span>robot<em>name:<span class="o">=</span>NAME</em>OF<em>ROBOT<span class="w"> </span>robot</em>ip:<span class="o">=</span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="c1"># Parameters must be formated this way or the command will give you an error</span>
+ </code></pre>
+ </div></p>
+
+<ul>
+<li>This script only works for one robot. If you need to start more than 1 robot, this should be done in mulitple terminals. (WIP)
+<h2>Using Nodes (Client)</h2></li>
+</ul></li>
+<li><p>Open new terminal and go to workspace</p></li>
+<li><p>Source overlay</p>
+
+<div class="codehilite">
+<pre><span></span><code><span class="nb">source</span><span class="w"> </span>install/setup.sh
+</code></pre>
+</div></li>
+<li><p>Start using!</p>
+
+<ul>
+<li>run a regular python file </li>
+<li>see tests/ for examples</li>
+</ul></li>
+</ol>
+
+<p><strong>Note: You will always need to source the overlay for each new terminal you open</strong></p>
+
+<p><em>For more examples, please refer to the <a href="https://example.com">Documentation</a></em></p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<p><!-- ROADMAP --></p>
+
+<h2>Roadmap</h2>
+
+<ul>
+<li>[ ] More ROS2 Packages</li>
+</ul>
+
+<p>See the <a href="https://github.com/UniversityOfIdahoCDACS/FANUC-Ethernet_IP_Drivers/issues">open issues</a> for a full list of proposed features (and known issues).</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<p><!-- LICENSE --></p>
+
+<h2>License</h2>
+
+<p>Distributed under the GNU General Public License v3. See <code>LICENSE.txt</code> for more information.</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p
+
+<!-- CONTACT -->
+## Contact
+
+Project Link: [https://github.com/UniversityOfIdahoCDACS/FANUC-ROS2_Drivers](https://github.com/UniversityOfIdahoCDACS/FANUC-ROS2_Drivers  )
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<p><!-- MARKDOWN LINKS &amp; IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links --></p>
