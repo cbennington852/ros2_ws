@@ -124,7 +124,29 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="action_servers.schunk_server.schunk_gripper_server.goal_callback">
 <span class="sig-name descname"><span class="pre">goal_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.schunk_server.schunk_gripper_server.goal_callback" title="Link to this definition"></a></dt>
-<dd><p>Accepts or Rejects client request to begin Action</p>
+<dd><p>Tells the robot to move to a gripper configuration.</p>
+<dl>
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>goal_request (SchunkGripper.Goal): Takes in a msg.command. Either “open” or “close”.</p></li>
+</ul>
+</dd>
+<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Running Schunk Test"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test 1"</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">schunk_ac</span><span class="o">.</span><span class="n">wait_for_server</span><span class="p">()</span>
+<span class="n">schunk_goal</span> <span class="o">=</span> <span class="n">SchunkGripper</span><span class="o">.</span><span class="n">Goal</span><span class="p">()</span>
+<span class="n">schunk_goal</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="s1">'open'</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">schunk_ac</span><span class="o">.</span><span class="n">send_goal</span><span class="p">(</span><span class="n">schunk_goal</span><span class="p">)</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test 2"</span><span class="p">)</span>
+<span class="n">schunk_goal</span> <span class="o">=</span> <span class="n">SchunkGripper</span><span class="o">.</span><span class="n">Goal</span><span class="p">()</span>
+<span class="n">schunk_goal</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="s1">'close'</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">schunk_ac</span><span class="o">.</span><span class="n">send_goal</span><span class="p">(</span><span class="n">schunk_goal</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>Returns:</dt><dd><p>response (GoalResponse): Either GoalResponse.REJECT or GoalResponse.ACCEPT</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

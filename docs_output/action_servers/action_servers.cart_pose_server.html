@@ -115,24 +115,35 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="action_servers.cart_pose_server.cart_pose_server.execute_callback">
 <span class="sig-name descname"><span class="pre">execute_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_handle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.cart_pose_server.cart_pose_server.execute_callback" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Executes the specified callback.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="action_servers.cart_pose_server.cart_pose_server.goal_callback">
 <span class="sig-name descname"><span class="pre">goal_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.cart_pose_server.cart_pose_server.goal_callback" title="Link to this definition"></a></dt>
 <dd><p>Tells the robot to move to a certain cartesian position.</p>
-<p>Accepts or Rejects client request to begin Action.</p>
-<p>w , p and r need to be greater than 179.9 or less than -179.9.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>goal_request (_type_): Takes in the certesian coords.
-goal.x,
-goal.y,
-goal.z,
-goal.w, 
-goal.p,
-goal.r</p>
+<p>w, r, and p must be greater than 179.9 or less than -179.9</p>
+<dl>
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>goal_request (CartPose.Goal): Takes in x,y,z,w,p,r parameters. Each are floats.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>GoalResponse: returns a GoalResponce either GoalResponse.ACCEPT or GoalResponse.REJECT</p>
+<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">cart_ac</span><span class="o">.</span><span class="n">wait_for_server</span><span class="p">()</span> <span class="c1"># Wait till its ready</span>
+<span class="n">cart_goal</span> <span class="o">=</span> <span class="n">CartPose</span><span class="o">.</span><span class="n">Goal</span><span class="p">()</span> <span class="c1"># Make goal</span>
+<span class="c1"># Add all coordinates </span>
+<span class="n">cart_goal</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">110.77</span>
+<span class="n">cart_goal</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">672.0</span>
+<span class="n">cart_goal</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="o">-</span><span class="mf">102.75</span>
+<span class="n">cart_goal</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mf">170.0</span>
+<span class="n">cart_goal</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">cart_goal</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="mf">30.0</span>
+<span class="n">future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_ac</span><span class="o">.</span><span class="n">send_goal_async</span><span class="p">(</span><span class="n">cart_goal</span><span class="p">,</span> <span class="n">feedback_callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feedback_callback</span><span class="p">)</span>
+<span class="n">future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">goal_response_callback</span><span class="p">)</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> 
+</pre></div>
+</div>
+</dd>
+<dt>Returns:</dt><dd><p>response (GoalResponse): Either GoalResponse.REJECT or GoalResponse.ACCEPT</p>
 </dd>
 </dl>
 </dd></dl>

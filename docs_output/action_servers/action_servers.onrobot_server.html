@@ -105,6 +105,7 @@
 <dt class="sig sig-object py" id="action_servers.onrobot_server.onrobot_gripper_server">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">action_servers.onrobot_server.</span></span><span class="sig-name descname"><span class="pre">onrobot_gripper_server</span></span><a class="headerlink" href="#action_servers.onrobot_server.onrobot_gripper_server" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></p>
+<p>Sets gripper angle.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="action_servers.onrobot_server.onrobot_gripper_server.cancel_callback">
 <span class="sig-name descname"><span class="pre">cancel_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_handle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.onrobot_server.onrobot_gripper_server.cancel_callback" title="Link to this definition"></a></dt>
@@ -124,7 +125,15 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="action_servers.onrobot_server.onrobot_gripper_server.goal_callback">
 <span class="sig-name descname"><span class="pre">goal_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.onrobot_server.onrobot_gripper_server.goal_callback" title="Link to this definition"></a></dt>
-<dd><p>Accepts or Rejects client request to begin Action</p>
+<dd><p>Tells the robot to move to a gripper configuration.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>goal_request (OnRobotGripper.Goal): Takes in a msg.width and a msg.force params. Force should be less than 120 and greater than 0. Width should be less than 160 and greater than 0.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>response (GoalResponse): Either GoalResponse.REJECT or GoalResponse.ACCEPT</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

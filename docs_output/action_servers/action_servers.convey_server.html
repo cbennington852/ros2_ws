@@ -115,19 +115,32 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="action_servers.convey_server.convey_server.execute_callback">
 <span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">execute_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_handle</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.convey_server.convey_server.execute_callback" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Executes the callback.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="action_servers.convey_server.convey_server.goal_callback">
 <span class="sig-name descname"><span class="pre">goal_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal_request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_servers.convey_server.convey_server.goal_callback" title="Link to this definition"></a></dt>
 <dd><p>Changes the conveyorbelt. Takes in a goal_request.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>goal_request (_type_): Takes in a goal.command.</dt><dd><p>command = “forward” 
+<dl>
+<dt>Args:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>goal_request (Conveyor.Goal): Takes in a goal.command.</dt><dd><p>command = “forward” 
 command = “reverse”
 command = “stop”</p>
 </dd>
 </dl>
+</li>
+</ul>
+</dd>
+<dt>Example:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Running Convey Tests"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test 1"</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">convey_ac</span><span class="o">.</span><span class="n">wait_for_server</span><span class="p">()</span>
+<span class="n">convey_goal</span> <span class="o">=</span> <span class="n">Conveyor</span><span class="o">.</span><span class="n">Goal</span><span class="p">()</span>
+<span class="n">convey_goal</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="s1">'forward'</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">convey_ac</span><span class="o">.</span><span class="n">send_goal</span><span class="p">(</span><span class="n">convey_goal</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 <dt>Returns:</dt><dd><p>GoalResponse: GoalResponse.ACCEPT or GoalResponse.REJECT</p>
 </dd>
