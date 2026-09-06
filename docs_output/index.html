@@ -96,7 +96,134 @@
             color: #7f8c8d;
             font-size: 0.9rem;
         }
-        
+
+/* Minimalist Sphinx / Read the Docs Theme */
+:root {
+    --sidebar-width: 260px;
+    --text-color: #333333;
+    --heading-color: #2980b9;
+    --link-color: #2980b9;
+    --link-hover: #3091d1;
+    --bg-body: #ffffff;
+    --bg-nav: #edf0f2;
+    --bg-code: #f8f9fa;
+    --border-color: #e1e4e5;
+    --font-serif: "Georgia", "Times New Roman", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+body {
+    margin: 0;
+    padding: 2rem 2.5rem 2.5rem calc(var(--sidebar-width) + 2.5rem);
+    background-color: var(--bg-body);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 800px;
+}
+
+/* Sphinx-style Fixed Left Sidebar Navigation */
+ul {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
+    background-color: var(--bg-nav);
+    border-right: 1px solid var(--border-color);
+    margin: 0;
+    padding: 1.5rem 0;
+    list-style: none;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+ul li a {
+    display: block;
+    padding: 0.4rem 1.5rem;
+    color: #555555;
+    text-decoration: none;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    transition: color 0.1s ease, background-color 0.1s ease;
+}
+
+ul li a:hover {
+    color: var(--link-hover);
+    background-color: #e2e6e9;
+}
+
+/* First Link (GitHub / Home) Accent */
+ul li:first-child a {
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+}
+
+/* Header & Typography */
+header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-family: var(--font-serif);
+    color: var(--heading-color);
+    font-size: 2.25rem;
+    font-weight: normal;
+    margin: 0;
+}
+
+h2 {
+    font-family: var(--font-serif);
+    color: #222222;
+    font-size: 1.5rem;
+    font-weight: normal;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.3rem;
+    margin: 2rem 0 1rem 0;
+}
+
+/* Sphinx-style Admonition Block (<details>) */
+details {
+    background-color: #fcfcfc;
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--heading-color);
+    margin: 1.25rem 0;
+}
+
+summary {
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--heading-color);
+    cursor: pointer;
+    user-select: none;
+    background-color: #f4f6f7;
+}
+
+summary:hover {
+    background-color: #eaecee;
+}
+
+/* Code Blocks */
+pre {
+    margin: 0;
+    padding: 1rem;
+    background-color: var(--bg-code);
+    border-top: 1px solid var(--border-color);
+    overflow-x: auto;
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: #24292e;
+}  
     </style>
     <!-- Prism Core JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
@@ -106,31 +233,35 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
 
 </head>
-<body>
 
+<body>
     <header>
         <h1>ROS2-Fanuc Robot Driver Documentation</h1>
     </header>
 
-    <div class="container">
-        <h2>Main Modules & Interfaces</h2>
-        
-        <ul class="nav-links">
-            <li><a href="./fanuc_interfaces">Fanuc Interfaces</a></li>
-            <li><a href="./action_servers">Action Servers</a></li>
-            <li><a href="./msg_publishers">Message Publishers</a></li>
-            <li><a href="./srv_services">Service Services</a></li>
-        </ul>
+    <ul>
+        <li><a href="https://github.com/UofI-CDACS/fanuc_ros2_drivers" >GitHub</a></li>
+        <li><a href="./fanuc_interfaces">Fanuc Interfaces</a></li>
+        <li><a href="./action_servers">Action Servers</a></li>
+        <li><a href="./msg_publishers">Message Publishers</a></li>
+        <li><a href="./srv_services">Service Services</a></li>
+    </ul>
 
-        <h2>Installation</h2>
-            <ul class="nav-links">
-            <li><a href="./installation_instructions.html">Installation</a></li>
-        </ul>
+</body>
 
+<p>
+    Welcome to the fanuc_ros2_drivers! Please read the <a href="https://github.com/UofI-CDACS/fanuc_ros2_drivers" >GitHub</a> for a complete installation guide.
+</p>
+
+<body>
+
+    
         <h2>Example Usage Code</h2>
-        <p>Below is a python code example.</p>
-        
-        <pre><code class="language-python">
+        <details>
+        <summary>
+            Example 1
+        </summary>
+            <pre><code class="language-python">
 """
 This is a test of all the actions and (if added) their feedbacks
 """
@@ -277,7 +408,85 @@ if __name__ == '__main__':
 
         </code></pre>
     </div>
+        </details>
+
+    <details>
+        <summary>
+            Example 2
+        </summary>
+
+
+            <pre><code class="language-python">"""
+This is a test of all the services
+"""
+# ROS packages
+import rclpy
+from rclpy.node import Node
+
+# Fanuc packages
+import fanuc_interfaces
+from fanuc_interfaces.srv import Mount, SetSpeed
+
+from time import sleep
+
+import sys
+sys.path.append("../src/dependencies/")
+from pynput.keyboard import KeyCode
+from key_commander import KeyCommander
+
+namespace = 'bunsen'
+
+class FanucServices(Node):
+    def __init__(self, namespace):
+        super().__init__("robot")
+		
+		# Services
+        self.mount_sc = self.create_client(Mount, f'{namespace}/go_mount')
+        self.speed_sc = self.create_client(SetSpeed, f'{namespace}/set_speed')
+		
+    def run_test(self):
+        print("Mount test")
+        # Mount position
+        request = Mount.Request()
+        while not self.mount_sc.wait_for_service(timeout_sec=1.0):
+            pass # Wait for service to be ready
+        print("Service ready, sending request")
+        future = self.mount_sc.call_async(request)
+        while not future.done():
+            pass # Wait to be done
+        print("Mount result:",future.result().success)
+
+
+        # Set Speed
+        print("Speed test")
+        request = SetSpeed.Request()
+        request.speed = 250
+        while not self.speed_sc.wait_for_service(timeout_sec=1.0):
+            pass # Wait for service to be ready
+        print("Service ready, sending request")
+        future = self.speed_sc.call_async(request)
+        while not future.done():
+            pass # Wait to be done
+        print("Speed result:",future.result().success)
+
+
+if __name__ == '__main__':
+    rclpy.init()
+	
+    fanuc = FanucServices(namespace)
+
+    keycom = KeyCommander([
+		(KeyCode(char='s'), fanuc.run_test),
+		])
+    print("S")
+    rclpy.spin(fanuc)
+    rclpy.shutdown()
+</code></pre>
+
+</details>
+
+</body>
+        
 
   
-</body>
 </html>
